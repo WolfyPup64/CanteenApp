@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Food Manager</title>
+</head>
+<body>
+<div align="center">
+	<h3><b th:text="${order}"></b></h3>
+    <h1>Food List</h1>
+    <h2><span th:text="${alert}"></span></h2>
+    <a href="/users">Back to Account Page</a>
+    <br/> <br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Food Name</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cart : ${listCart}">
+                <td th:text="${cart.itemName}">Food Name</td>
+                <td th:text="'$' + ${cart.cost}">Price</td>
+                <td th:text="${cart.amount}">Amount</td>
+                <td>
+					<form th:action="@{/update-amount}" method="post">
+						<input type="hidden" id = "cartId" th:name = "cartId" th:value = "${cart.cartId}" />
+						<input type="number" id = "amount" th:name = "amount" min = "1" required/>
+						<input type="submit" value="Update Amount" />
+					</form>
+					<br/>
+					<form th:action="@{/delete-from-cart}" method="post">
+						<input type="hidden" id = "cartId" th:name = "cartId" th:value = "${cart.cartId}" />
+						<input type="submit" value="Delete" />
+					</form>					                
+                </td>            
+            </tr>        
+        </tbody>
+    </table>
+    
+    <h4>Total: $<b th:text="${total}" style = "padding-right : 20em"></b><a href="/make-order">Confirm Order</a></h4>
+
+</div>   
+</body>
+</html>

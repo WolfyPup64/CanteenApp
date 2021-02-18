@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Add Money</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<h1>Your Current Wallet</h1>
+			<div th:each="user: ${currentUser}">
+				<h3>Wallet: <b>$<span th:text="${user.wallet}"></span></b></h3>
+				<h3><a th:href="@{/users}">Back to your account.</a></h3>
+			</div>
+		</div>
+		<div class="container text-center">
+			<form th:action="@{/money-added}"
+				method="post" style="max-width: 600px; margin: 0 auto;">
+				<div class="form-group row">
+					<label for="wallet" style="font-size:18px; margin:0px 0px 0px 130px">Amount to add ($):</label>
+					<div>
+						<input type="number" id = "money" th:name = "money" step = "0.01" min=".01" style="font-size:18px" value="0">
+					</div>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">Add Money</button> 
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

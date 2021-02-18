@@ -1,0 +1,48 @@
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Order Page</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div align="center">
+		<div>
+			<h2>Welcome to the Accepted Orders Page.</h2>
+			<h3><a href="/vendor">Back to Vendor Home Page</a></h3>
+			<h3><a href="/order">Back to Order Home Page</a></h3>
+		</div>
+		    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="o : ${order}">
+                <td th:text="${o.orderId}">Order ID</td>
+                <td th:text="${o.userId}">User ID</td>
+                <td th:text="${o.orderNumber}">Order Number</td>                 
+                <td th:text="${o.orderDate}">Order Date</td>                
+                <td th:text="'$' + ${o.cost}">Cost</td>
+                <td>
+                	<form th:action="@{/view-accepted}" method="post">
+                		<input type="hidden" id = "orderNumber" th:name = "orderNumber" th:value = "${o.orderNumber}" />
+                		<input type="hidden" id = "userId" th:name = "userId" th:value = "${o.userId}" />
+						<input type="submit" value="View" />
+                	</form>
+                	<form th:action="@{/order-com}" method="post">
+                		<input type="hidden" id = "orderId" th:name = "orderId" th:value = "${o.orderId}" />
+						<input type="submit" value="Completed" />
+                	</form>                 	              
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	</div>
+</body>
