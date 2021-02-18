@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Food Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Food List</h1>
+    <a href="/vendor">Back to Vendor Home Page</a>
+    <br/>
+    <a href="/new">Create New Food Item</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Food ID</th>
+                <th>Food Name</th>
+                <th>Price</th>
+                <th>Calories</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="food : ${listFood}">
+                <td th:text="${food.foodId}">Food ID</td>
+                <td th:text="${food.foodName}">Food Name</td>
+                <td th:text="'$' + ${food.price}">Price</td>
+                <td th:text="${food.calories}">Calories</td>
+                <td th:text="${food.description}">Description</td>
+                <td>
+                    <a th:href="@{'/edit/' + ${food.foodId}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/' + ${food.foodId}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>

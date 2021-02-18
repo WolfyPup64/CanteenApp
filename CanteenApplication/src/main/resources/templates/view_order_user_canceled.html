@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>View Order</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div align="center">
+		<div>
+			<h2>This is what is in this order.</h2>
+			<h3><a href="/order-canceled-user">Back to Your Canceled Orders Page</a></h3>
+		</div>
+		<table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr th:each="o : ${order}">
+        		<td th:text="${o.orderId}"></td>     	
+                <td th:text="${o.userId}">User ID</td>
+                <td th:text="${o.orderNumber}">Order Number</td>                 
+                <td th:text="${o.orderDate}">Order Date</td>                
+                <td th:text="'$' + ${o.cost}">Cost</td>        		
+        	</tr>
+        </tbody>
+    </table>
+	</div>
+	<div align="center">
+			</br>
+			<h3>Cart</h3>
+			<table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Food Name</th>
+                <th>Price</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr th:each="c : ${cart}">
+        		 <td th:text="${c.itemName}"></td>
+                <td th:text="'$' + ${c.cost}">Price</td>
+                <td th:text="${c.amount}">Amount</td>        		         		
+        	</tr>
+        </tbody>
+    </table>
+	</div>
+</body>
+</html>

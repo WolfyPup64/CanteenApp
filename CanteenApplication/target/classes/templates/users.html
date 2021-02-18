@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Your Account</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+	<div>
+		<form th:action="@{/log}">
+			<h2><span th:text="${warning}"></span></h2>
+			<h3>Welcome to your account.</h3>
+			<br>
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+	<div>
+		<br>
+		<h2>Account Information</h2>
+		<div th:each="user: ${currentUser}">
+			<h4>Email: <b><span th:text="${user.email}"></span></b></h4>
+			<h4>First Name: <b><span th:text="${user.firstName}"></span></b></h4>
+			<h4>Last Name: <b><span th:text="${user.lastName}"></span></b></h4>
+			<h4>Address: <b><span th:text="${user.address}"></span></b></h4>
+			<h4>Town: <b><span th:text="${user.town}"></span></b></h4>
+			<h4>State: <b><span th:text="${user.state}"></span></b></h4>			
+			<h4>Wallet: <b>$<span th:text="${user.wallet}"></span></b></h4>
+		</div>
+		
+		<h3><a th:href="@{/wallet}">Add Money to your Wallet</a></h3>
+		<h3><a th:href="@{/view-cart}">Click here to see your cart.</a></h3>
+		<h3><a th:href="@{/food-list}">Click here to see what food is available.</a></h3>
+		<h3><a th:href="@{/order-user}">Click here to view your orders.</a></h3>		
+		<h3><a th:href="@{/vendor-check}">Click here to access the vendor page.</a></h3>
+		<h3><a th:href="@{/edit-user}">Click here to edit your account info.</a></h3>				
+	</div>
+	
+</div>
+</body>
+</html>

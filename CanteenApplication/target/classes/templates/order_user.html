@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Order Page</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div align="center">
+		<div>
+			<h2>Welcome to your Orders Page.</h2>
+			<h3><a href="/users">Back to Home Page</a></h3>
+			<h3><a href="/order-accepted-user">Accepted Orders</a></h3>
+			<h3><a href="/order-completed-user">Completed Orders</a></h3>
+			<h3><a href="/order-canceled-user">Canceled Orders</a></h3>							
+		</div>
+		    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="o : ${order}">
+            	<td th:text="${o.orderId}">Order ID</td>
+                <td th:text="${o.userId}">User ID</td>
+                <td th:text="${o.orderNumber}">Order Number</td>                 
+                <td th:text="${o.orderDate}">Order Date</td>                
+                <td th:text="'$' + ${o.cost}">Cost</td>
+                <td>
+                    <form th:action="@{/view-user}" method="post">
+                		<input type="hidden" id = "orderNumber" th:name = "orderNumber" th:value = "${o.orderNumber}" />
+						<input type="submit" value="View" />
+                	</form>
+                	</br>
+                    <form th:action="@{/cancel-user}" method="post">
+						<input type="hidden" id = "orderId" th:name = "orderId" th:value = "${o.orderId}" />
+						<input type="hidden" id = "cost" th:name = "cost" th:value = "${o.cost}" />
+						<input type="hidden" id = "userId" th:name = "userId" th:value = "${o.userId}" />
+						<input type="submit" value="Cancel" />
+					</form>
+				</td>	            	
+            </tr>
+        </tbody>
+    </table>
+	</div>
+</body>
+</html>
